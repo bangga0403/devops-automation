@@ -17,5 +17,16 @@ pipeline {
                 }
             }
         }
+        stage('Push image to Hub'){
+            steps{
+                script{
+                   withCredentials([string(credentialsId: 'bangga0403', variable: 'dockerhubpwd')]) {
+                   sh 'docker login -u bangga0403 -p ${dockerhubpwd}'
+
+                    }
+                   sh 'docker push bangga0403/devops-integration'
+                }
+            }
+        }
     }
 }
